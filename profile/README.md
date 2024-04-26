@@ -11,7 +11,7 @@ Also note that I made this organization mostly to not clog up my personal accoun
 ## Bit more complete setup guide:
 #### ServerManager 
 - Download the serverMgr
-- Fill in the config files under config/games/ for all your games (follow the examples that are there by default. For now pushing my configs directly, will change on this thing is stable enough)
+- Fill in the config files under config/games/ for all your games (follow the examples that are there by default. For now pushing my configs directly, will change once this thing is stable enough)
 - Fill in the lobby configs under config/lobby/ (same as game configs)
 - Provide server templates in cache/servers/, maps in /cache/maps/<game>/ and plugins in /cache/plugins/
 - Provide lobby instances in instance_lobbies/ (NOTE: UNLIKE TEMPLATES WHICH ARE COPIED TO A NEW DIRECTORY EVERY TIME A NEW ONE GETS CREATED, THE LOBBY INSTANCES ARE USED AS IS, THAT MEANS THEY CAN CHANGE THE WORLD AND EVERYTHING)
@@ -41,6 +41,8 @@ All the game servers do is handle themselves, if you configured the templates ri
 - Limited to 1 machine (will change soon, at least by allowing to start servers through ssh remotes. Still underoptimal kinda, but easy and if the servermanager itself is stable should be error proof)
 - No 1.6 :(
 - Dependencies are kinda messy, ideally the core plugin (when it's done) should include the basic always required libraries (eg the VelocityHandler) while the game plugins should include other libs (and have required libraries as compileOnly)
+- Velocity itself is handling the server requests/switches. That's not really a problem, except for the fact Velocity can't handle lobby swaps, eg if you restart the ServerManager it'll keep the old servers (including the old lobbies), meaning you'll also have to restart Velocity
+- On top of the previous point, there's no way to add games on the fly (=without killing every running server)
 
 ## Missing stuff
 - Stats
